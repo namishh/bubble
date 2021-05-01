@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card  ml-3 mr-3">
+    <div class="card-body">
+      <h5 class="card-title">{{post.title}}</h5> 
+      <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+      <p class="card-text">
+        {{ post.content }}
+      </p>
+      <a href="{{url_for('view_post', post_id=post.id) }}" class="btn btn-outline-dark">Full Post</a>
+      <a href="{{url_for('update_post', post_id=post.id) }}" class="ml-3 btn btn-outline-secondary">Update Post</a>
+      <a href="{{url_for('delete_post', post_id=post.id) }}" class="ml-3 btn btn-outline-danger">Delete Post</a>
+
+    </div><br>
+  </div><br>
+      
+  {% endblock content %}
