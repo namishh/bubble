@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  {% for post in posts_arranged.items %}
+  <div class="card  ml-3 mr-3">
+    <div class="card-body">
+      <h5 class="card-title">{{post.title}}</h5> 
+      <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+      <p class="card-text">
+        {% if post.content | length > 700 %}
+        {{ post.content  | truncate(700) }} <br>
+        <a href="{{url_for('view_post', post_id=post.id) }}" class="btn btn-outline-dark">Full Post</a>
+        <a href="{{url_for('update_post', post_id=post.id) }}" class="ml-3 btn btn-outline-secondary">Update Post</a>
+        <a href="{{url_for('delete_post', post_id=post.id) }}" class="ml-3 btn btn-outline-danger">Delete Post</a>
+
+        {%else%}
+        {{ post.content }}<br>
+        <a href="{{url_for('update_post', post_id=post.id) }}" class=" btn btn-outline-secondary">Update Post</a>
+        <a href="{{url_for('delete_post', post_id=post.id) }}" class="ml-3 btn btn-outline-danger">Delete Post</a>
+
+        
+        {% endif %}
+      </p>
+
+    </div><br>
+  </div><br>
+  {% endfor %}
+  {% for page_num in posts_arranged.iter_pages(left_edge=2, right_edge=2, left_current=1, right_current=2) %}
+  {% if page_num %}
+        {% if posts_arranged.page == page_num %}
+        <a class="ml-3 btn btn-dark mb-4"href="{{url_for('home', page=page_num)}}">{{page_num}}</a>
+        {% else %}
+        <a class= "ml-3 btn btn-outline-dark mb-4"href="{{url_for('home', page=page_num)}}">{{page_num}}</a>
+  
+        {% endif %}
+  {% else %}
+  ...
+  {% endif %}
+  {% endfor %}
+{% endblock content %}

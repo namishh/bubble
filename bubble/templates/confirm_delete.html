@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card  ml-3 mr-3">
+    <div class="card-body">
+      <h5 class="card-title">Are ypu sure you want to delete the post "{{post.title}}"?</h5> 
+      <small class="text-muted">It will be deleted forever</small>
+      <p class="card-text">
+        <a href="{{url_for('post_deleted', post_id=post.id)}}" class="btn btn-danger">Yes</a>
+        <a href="{{url_for('home') }}" class="ml-3 btn btn-outline-secondary">No, Go Back</a>
+      </p>
+
+    </div><br>
+  </div><br>
+{% endblock content %}
